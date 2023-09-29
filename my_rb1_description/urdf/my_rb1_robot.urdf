@@ -1,5 +1,22 @@
 <?xml version="1.0"?>
 <robot name="my_rb1_robot">
+    
+    <!-- Gazebo Color Reference -->
+    <gazebo reference="base_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="left_wheel">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="right_wheel">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="front_caster">
+        <material>Gazebo/Grey</material>
+    </gazebo>
+    <gazebo reference="back_caster">
+        <material>Gazebo/Grey</material>
+    </gazebo>
 
     <!-- Base Footprint -->
     <joint name="base_footprint_joint" type="fixed">
