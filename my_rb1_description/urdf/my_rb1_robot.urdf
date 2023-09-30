@@ -2,22 +2,55 @@
 <robot name="my_rb1_robot">
 
     <!-- Gazebo Plugin's -->
+    <!-- Gazebo Diferenctial Driver Controler Plugin -->
     <gazebo>
         <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
             <alwaysOn>true</alwaysOn>
             <updateRate>20</updateRate>
             <leftJoint>left_wheel_joint</leftJoint>
             <rightJoint>right_wheel_joint</rightJoint>
-            <wheelSeparation></wheelSeparation>
-            <wheelDiameter>0.8</wheelDiameter>
+            <wheelSeparation>0.4</wheelSeparation>
+            <wheelDiameter>0.05</wheelDiameter>
             <torque>10</torque>
             <commandTopic>cmd_vel</commandTopic>
             <odometryTopic>odom</odometryTopic>
             <odometryFrame>odom</odometryFrame>
-            <robotBaseFrame>link_chassis</robotBaseFrame>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
         </plugin>
     </gazebo>
-    <!-- Gazebo Diferenctial Driver Controler Plugin -->
+
+    <!-- Gazebo tags - Laser scan -->
+    <gazebo reference="front_laser">
+        <sensor type="ray" name="head_hokuyo_sensor">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>20</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>1</resolution>
+                        <min_angle>-1.570796</min_angle>
+                        <max_angle>1.570796</max_angle>
+                    </horizontal>
+                </scan>
+            <range>
+                <min>0.20</min>
+                <max>10.0</max>
+                <resolution>0.01</resolution>
+            </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>0.01</stddev>
+                </noise>
+            </ray>
+            <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+                <topicName>/scan</topicName>
+                <frameName>sensor_laser</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
     
     <!-- Gazebo Color Reference -->
     <gazebo reference="base_link">
@@ -35,6 +68,8 @@
     <gazebo reference="back_caster">
         <material>Gazebo/Grey</material>
     </gazebo>
+    <!-- END OF PLUGIN -->
+
 
     <!-- Base Footprint -->
     <joint name="base_footprint_joint" type="fixed">
