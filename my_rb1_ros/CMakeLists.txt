@@ -11,8 +11,10 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   roscpp
   std_msgs
+  nav_msgs
   geometry_msgs
   tf
+
 )
 
 ## System dependencies are found with CMake's conventions
@@ -106,7 +108,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES my_rb1_ros
-	CATKIN_DEPENDS message_generation roscpp std_msgs
+	CATKIN_DEPENDS message_generation roscpp std_msgs geometry_msgs nav_msgs message_runtime
 #  DEPENDS system_lib
 )
 
